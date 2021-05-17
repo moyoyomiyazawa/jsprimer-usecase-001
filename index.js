@@ -1,6 +1,3 @@
-const userId = 'moyoyomiyazawa';
-
-
 const buttonClickHandler = async () => {
   try {
     const userId = getUserId();
@@ -15,16 +12,17 @@ const buttonClickHandler = async () => {
 
 const getUserId = () => {
   return document.getElementById('userId').value;
-}
+};
 
 const fetchUserInfo = async (userId) => {
-  const response = await fetch(`https://api.github.com/users/${encodeURIComponent(userId)}`);
+  const response = await fetch(
+    `https://api.github.com/users/${encodeURIComponent(userId)}`
+  );
   if (!response.ok) {
     throw new Error('Network response was not ok');
   }
   return response.json();
-}
-
+};
 
 const createUserInfoElement = (userInfo) => {
   return escapeHTML`
@@ -39,7 +37,6 @@ const createUserInfoElement = (userInfo) => {
   `;
 };
 
-
 function escapeSpecialChars(str) {
   return str
     .replace(/&/g, '&amp;')
@@ -48,7 +45,6 @@ function escapeSpecialChars(str) {
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#039;');
 }
-
 
 function escapeHTML(strings, ...values) {
   return strings.reduce((result, str, i) => {
